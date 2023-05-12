@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MIR STT</title>
+  </head>
+  <body class="bg-dark">
+    <div id="app">
+      <nav class="navbar navbar-expand-lg bg-dark">
+        <div class="container-fluid">
+          <h1 class="navbar-brand text-white fs-3">
+            <img src="/mir.png" alt="mir logo" style="height: 40px" /> Speech to
+            text
+          </h1>
+          <div class="d-flex" role="search">
+            <select class="form-select" id="lang-select">
+              <option value="bn-BD">Bangla</option>
+              <option value="en-US">English US</option>
+              <option value="fr-FR">French</option>
+              <option value="de-DE">German</option>
+              <option value="es-ES">Spanish</option>
+            </select>
+          </div>
+        </div>
+      </nav>
+      <div class="container my-4">
+        <div
+          class="form-floating form-control shadow"
+          style="min-height: 300px"
+        >
+          <span id="final"></span>
+          <span id="interim"></span>
+        </div>
+        <div class="btn-group mt-4" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-success" id="start">
+            Start
+          </button>
+          <button type="button" class="btn btn-danger" id="stop">Stop</button>
+        </div>
+        <div class="mt-4">
+          <p id="status" class="lead mt-3" style="display: none">
+            Listening...
+          </p>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
