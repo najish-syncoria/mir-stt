@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MIR STT</title>
   </head>
@@ -37,8 +37,13 @@
           <button type="button" class="btn btn-success" id="start">
             Start
           </button>
-          <button type="button" class="btn btn-danger" id="stop">Stop</button>
+          <button type="button" class="btn btn-danger" id="stop" disabled>
+            Stop
+          </button>
         </div>
+        <button type="button" class="btn btn-primary mx-4 mt-4" id="transcribe">
+          Transcribe
+        </button>
         <div class="mt-4">
           <p id="status" class="lead mt-3" style="display: none">
             Listening...
@@ -46,6 +51,6 @@
         </div>
       </div>
     </div>
-    <script type="module" src="./main.js"></script>
+    <script type="module" src="./src/main.js"></script>
   </body>
 </html>

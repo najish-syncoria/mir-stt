@@ -1,5 +1,3 @@
-import "./style.scss";
-
 var userAgent = navigator.userAgent;
 
 // Check if the user's browser is Google Chrome
@@ -82,17 +80,61 @@ if (userAgent.indexOf("Chrome") == -1) {
     // let timer = null;
 
     // Set the onClick property of the start button
-    document.querySelector("#start").onclick = () => {
+    const startButton = document.getElementById("start");
+    const stopButton = document.getElementById("stop");
+    const transcribeButton = document.querySelector("#transcribe");
+
+    startButton.onclick = () => {
       speechRecognition.start();
       isRecognitionStarted = true;
+      stopButton.disabled = false;
+      stopButton.setAttribute("aria-disabled", "false");
+      startButton.disabled = true;
+      startButton.setAttribute("aria-disabled", "true");
+      transcribeButton.disabled = true;
+      transcribeButton.setAttribute("aria-disabled", "true");
     };
     // Set the onClick property of the stop button
-    document.querySelector("#stop").onclick = () => {
+    stopButton.onclick = () => {
       // Stop the Speech Recognition
       setTimeout(() => {
         speechRecognition.stop();
       }, 320);
       isRecognitionStarted = false;
+      stopButton.disabled = true;
+      stopButton.setAttribute("aria-disabled", "true");
+      startButton.disabled = false;
+      startButton.setAttribute("aria-disabled", "false");
+      transcribeButton.disabled = false;
+      transcribeButton.setAttribute("aria-disabled", "false");
+    };
+    // Set the onClick property of the transcribe button
+    transcribeButton.onclick = async () => {
+      try {
+        if (final_transcript.length === 0) {
+          alert("Not enough text to transcribe");
+          return;
+        }
+        transcribeButton.disabled = true;
+        transcribeButton.setAttribute("aria-disabled", "true");
+        const response = await fetch("http://localhost:3000/transcribe", {
+          method: "post",
+          body: JSON.stringify({
+            message: final_transcript,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.log(error.message);
+      }
+      transcribeButton.disabled = false;
+      transcribeButton.setAttribute("aria-disabled", "false");
+      final_transcript = "";
+      document.querySelector("#final").innerHTML = final_transcript;
     };
   } else {
     console.log("Speech Recognition Not Available");
